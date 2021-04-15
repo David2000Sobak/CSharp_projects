@@ -15,6 +15,7 @@ namespace Project2
         List<Wardrobe> w = new List<Wardrobe>();
         private void btnChoose_Click(object sender, RoutedEventArgs e)
         {
+            //Нахожу файл на устройстве
             OpenFileDialog dialog = new OpenFileDialog()
             {
                 Multiselect = false,
@@ -22,12 +23,14 @@ namespace Project2
             };
             if (dialog.ShowDialog() == true)
             {
+                //Открываю найденный файл в программе ворд
                 Word.Application app = new Word.Application();
                 object filename = dialog.FileName;
                 app.Documents.Open(filename, ReadOnly: true);
                 Word.Document document = app.ActiveDocument;
                 Word.Table table = document.Tables[2];
-
+                
+                //Парсинг нужных данных из интерсующей таблицы
                 for (int i = 2; i <= table.Rows.Count; i++)
                 {
                     w.Add(new Wardrobe(){ CanId = table.Cell(i, 2).Range.Text,
@@ -45,6 +48,7 @@ namespace Project2
 
         private void btnShow_Click(object sender, RoutedEventArgs e)
         {
+            //Вывод данных на экран
             WardrobeData.ItemsSource = null;
             WardrobeData.ItemsSource = w;
         }
