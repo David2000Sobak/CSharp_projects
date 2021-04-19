@@ -11,7 +11,6 @@ namespace ExcelFileUnion
     {
         Dictionary<string, List<Worksheet>> excelData;
         List<string> filePaths = new List<string>();
-        //Пути к изначальным файлам
         private const string file1 = @"C:\Users\galya\Desktop\Tablitsa_Ux-Rts_St_glubokaya_Per_Glubokaya_-_Andrianovskaya_ver1_24_03_2021.xlsx";
         private const string file2 = @"C:\Users\galya\Desktop\Tablitsa_Ux-Rts_St_glubokaya_Per_Podkamennaya-Glubokaya_ver1_23_03_2021.xlsx";
         private const string file3 = @"C:\Users\galya\Desktop\Tablitsa_Ux-Rts_Glubokaya_ver1_17_02_2021.xlsx";
@@ -33,20 +32,17 @@ namespace ExcelFileUnion
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //Кнопка для извлечения данных из файлов
             excelData = new Dictionary<string, List<Worksheet>>();
             AllFilesReadAsync(filePaths);
         }
 
         private void ButtonPathChoose_Click(object sender, RoutedEventArgs e)
         {
-            //Кнопка для выбора пути сохраняемого файла
             ChoosePath();
         }
 
         private void ChoosePath()
         {
-            //Получение пути для сохранения
             SaveFileDialog dialog = new SaveFileDialog()
             {
                 Filter = "Excel files |*.xlsx"
@@ -59,7 +55,6 @@ namespace ExcelFileUnion
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            //Кнопка генерации файла
             if(excelData == null)
             {
                 MessageBox.Show("Please, extract data from excel files.");
@@ -73,7 +68,7 @@ namespace ExcelFileUnion
 
             btnGenerate.IsEnabled = false;
             btnExtract.IsEnabled = false;
-
+    
             UploadData();
 
             btnGenerate.IsEnabled = true;
@@ -82,7 +77,6 @@ namespace ExcelFileUnion
 
         private void UploadData()
         {
-            //Метод генерации
             Excel.Application app = new Excel.Application();
             app.Visible = true;
             if (app == null)
@@ -149,27 +143,34 @@ namespace ExcelFileUnion
 
         private async void AllFilesReadAsync(List<string> filePaths)
         {
+
             btnExtract.IsEnabled = false;
             btnGenerate.IsEnabled = false;
 
             tbFileIndicator.Text = $"Files completed: 0 out of {filePaths.Count} (0%)";
+
+
+
             foreach (var item in filePaths)
             {
-                FileReadAsync(item);
-                await Task.Delay(2000);
+                await Task.Run(() => { FileRead(item); });
+                progressBar.Value++;
+                tbFileIndicator.Text = $"Files completed: {progressBar.Value} out of {filePaths.Count} ({(progressBar.Value / filePaths.Count).ToString("#.##%")})";
             }
-            await Task.Delay(1000);
+            await Task.Delay(500);
+
+
+
             progressBar.Value = 0;
             tbFileIndicator.Text = "";
 
             btnExtract.IsEnabled = true;
             btnGenerate.IsEnabled = true;
         }
-        private async void FileReadAsync(string fileName)
+        private void FileRead(string fileName)
         {
 
-            await Task.Run(() =>
-            {
+            
                 Excel.Application app = new Excel.Application();
                 Excel.Workbook wb = app.Workbooks.Open(fileName, ReadOnly: true);
                 foreach (Excel.Worksheet ws in wb.Worksheets)
@@ -191,9 +192,9 @@ namespace ExcelFileUnion
                         Data = new List<ChannelSpan>()
 
                     });
+                    int row = 9;
                     for (int i = 0; i < 6; i++)
-                    {
-                        int row = 9;
+                    { 
                         excelData[name][excelData[name].Count - 1].Data.Add(new ChannelSpan
                         {
                             Name = ws.Range[$"A{row}"].Value,
@@ -214,10 +215,9 @@ namespace ExcelFileUnion
                 }
                 wb.Close();
                 app.Quit();
-            });
-            progressBar.Value++;
-            //Генерация информационной сроки приложения
-            tbFileIndicator.Text = $"Files completed: {progressBar.Value} out of {filePaths.Count} ({(progressBar.Value/filePaths.Count).ToString("#.##%")})";
+            
+            
+            
         } 
     }
 }
