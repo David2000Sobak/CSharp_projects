@@ -11,6 +11,7 @@ namespace ExcelFileUnion
     {
         Dictionary<string, List<Worksheet>> excelData;
         List<string> filePaths = new List<string>();
+        //Пути к изначальным файлам
         private const string file1 = @"C:\Users\galya\Desktop\Tablitsa_Ux-Rts_St_glubokaya_Per_Glubokaya_-_Andrianovskaya_ver1_24_03_2021.xlsx";
         private const string file2 = @"C:\Users\galya\Desktop\Tablitsa_Ux-Rts_St_glubokaya_Per_Podkamennaya-Glubokaya_ver1_23_03_2021.xlsx";
         private const string file3 = @"C:\Users\galya\Desktop\Tablitsa_Ux-Rts_Glubokaya_ver1_17_02_2021.xlsx";
@@ -32,17 +33,20 @@ namespace ExcelFileUnion
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //Кнопка выгрузки данных из фалов
             excelData = new Dictionary<string, List<Worksheet>>();
             AllFilesReadAsync(filePaths);
         }
 
         private void ButtonPathChoose_Click(object sender, RoutedEventArgs e)
         {
+            //Кнопка получения пути для сохранения нового файла
             ChoosePath();
         }
 
         private void ChoosePath()
         {
+            //Получение пути
             SaveFileDialog dialog = new SaveFileDialog()
             {
                 Filter = "Excel files |*.xlsx"
@@ -55,6 +59,7 @@ namespace ExcelFileUnion
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            //Кнопка генерации нового файла.
             if(excelData == null)
             {
                 MessageBox.Show("Please, extract data from excel files.");
@@ -77,6 +82,7 @@ namespace ExcelFileUnion
 
         private void UploadData()
         {
+            //Генерация файла
             Excel.Application app = new Excel.Application();
             app.Visible = true;
             if (app == null)
