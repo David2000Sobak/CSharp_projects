@@ -8,6 +8,7 @@ namespace ExcelFileUnion
 {
     class Worksheet
     {
+        //Сохраненные листы из файлов
         public WhHeader Headers { get; set; }
         public List<ChannelSpan> Data { get; set; }
     }
