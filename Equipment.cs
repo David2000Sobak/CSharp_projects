@@ -8,6 +8,7 @@ namespace ExcelFileUnion
 {
     class Equipment
     {
+        //Экземпляр канала и его номера
         public string ChannelNumber { get; set; }
         public string Number { get; set; }
     }
