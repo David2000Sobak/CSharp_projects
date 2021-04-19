@@ -11,6 +11,7 @@ namespace ExcelFileUnion
     {
         Dictionary<string, List<Worksheet>> excelData;
         List<string> filePaths = new List<string>();
+        //Пути к изначальным файлам
         private const string file1 = @"C:\Users\galya\Desktop\Tablitsa_Ux-Rts_St_glubokaya_Per_Glubokaya_-_Andrianovskaya_ver1_24_03_2021.xlsx";
         private const string file2 = @"C:\Users\galya\Desktop\Tablitsa_Ux-Rts_St_glubokaya_Per_Podkamennaya-Glubokaya_ver1_23_03_2021.xlsx";
         private const string file3 = @"C:\Users\galya\Desktop\Tablitsa_Ux-Rts_Glubokaya_ver1_17_02_2021.xlsx";
@@ -32,17 +33,20 @@ namespace ExcelFileUnion
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //Кнопка для извлечения данных из файлов
             excelData = new Dictionary<string, List<Worksheet>>();
             AllFilesReadAsync(filePaths);
         }
 
         private void ButtonPathChoose_Click(object sender, RoutedEventArgs e)
         {
+            //Кнопка для выбора пути сохраняемого файла
             ChoosePath();
         }
 
         private void ChoosePath()
         {
+            //Получение пути для сохранения
             SaveFileDialog dialog = new SaveFileDialog()
             {
                 Filter = "Excel files |*.xlsx"
@@ -55,6 +59,7 @@ namespace ExcelFileUnion
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
+            //Кнопка генерации файла
             if(excelData == null)
             {
                 MessageBox.Show("Please, extract data from excel files.");
@@ -62,26 +67,22 @@ namespace ExcelFileUnion
             }
             if (string.IsNullOrEmpty(txbFileName.Text))
             {
-                SaveFileDialog dialog = new SaveFileDialog()
-                {
-                    Filter = "Excel files |*.xlsx"
-                };
-                if (dialog.ShowDialog() == true)
-                {
-                    txbFileName.Text = dialog.FileName;
-                }
+                ChoosePath();
                 return;
             }
 
             btnGenerate.IsEnabled = false;
+            btnExtract.IsEnabled = false;
 
             UploadData();
 
             btnGenerate.IsEnabled = true;
+            btnExtract.IsEnabled = true;
         }
 
         private void UploadData()
         {
+            //Метод генерации
             Excel.Application app = new Excel.Application();
             app.Visible = true;
             if (app == null)
@@ -215,6 +216,7 @@ namespace ExcelFileUnion
                 app.Quit();
             });
             progressBar.Value++;
+            //Генерация информационной сроки приложения
             tbFileIndicator.Text = $"Files completed: {progressBar.Value} out of {filePaths.Count} ({(progressBar.Value/filePaths.Count).ToString("#.##%")})";
         } 
     }
