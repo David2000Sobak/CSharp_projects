@@ -8,6 +8,7 @@ namespace ExcelFileUnion
 {
     class ChannelSpan
     {
+        //Подтаблицы нахоящиеся в листах
         public string Name { get; set; }
         public List<Equipment> Span { get; set; }
     }
