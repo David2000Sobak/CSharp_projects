@@ -1,0 +1,150 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task {
+    &-theme-light {
+        background-color: white;
+
+        position: relative;
+        display: block;
+        width: 400px;
+        height: 80px;
+        margin-top: 20px;
+
+        &:hover {
+            position: relative;
+            top: 1px;
+        }
+
+        .name {
+            font-family: Rockwell;
+            color: black;
+            font-size: 15px;
+            left: 120px;
+            top: 10px;
+            line-height: 15px;
+            font-weight: bold;
+            display: inline-block;
+            position: absolute;
+        }
+
+        .description {
+            font-family: Rockwell;
+            color: black;
+            left: 20px;
+            top: 30px;
+            font-size: 14px;
+            line-height: 14px;
+            display: inline-block;
+            position: absolute;
+        }
+
+        .completed {
+            font-family: Rockwell;
+            color: black;
+            left: 20px;
+            top: 55px;
+            font-size: 13px;
+            line-height: 13px;
+            display: inline-block;
+            position: absolute;
+        }
+    }
+
+    &-theme-dark {
+        background-color: #333333;
+        position: relative;
+        display: block;
+        width: 400px;
+        height: 80px;
+        margin-top: 20px;
+
+        &:hover {
+            position: relative;
+            top: 1px;
+        }
+
+        .name {
+            font-family: Rockwell;
+            color: white;
+            font-size: 15px;
+            left: 120px;
+            top: 10px;
+            line-height: 15px;
+            font-weight: bold;
+            display: inline-block;
+            position: absolute;
+        }
+
+        .description {
+            font-family: Rockwell;
+            color: white;
+            left: 20px;
+            top: 30px;
+            font-size: 14px;
+            line-height: 14px;
+            display: inline-block;
+            position: absolute;
+        }
+
+        .completed {
+            font-family: Rockwell;
+            color: white;
+            left: 20px;
+            top: 55px;
+            font-size: 13px;
+            line-height: 13px;
+            display: inline-block;
+            position: absolute;
+        }
+    }
+}
+
+.button {
+    &-theme-light {
+        background-color: #F8BBD0;
+        color: black;
+        width: 150px;
+        height: 40px;
+        border-style: none;
+        position: absolute;
+        font-family: Rockwell;
+        font-size: 14px;
+        line-height: 14px;
+        top: 20px;
+        right: 20px;
+
+        &:hover {
+            background-color: #FCE4EC;
+        }
+
+        &:active {
+            background-color: white;
+        }
+    }
+
+    &-theme-dark {
+        background-color: black;
+        color: white;
+        width: 150px;
+        height: 40px;
+        border-style: none;
+        position: absolute;
+        font-family: Rockwell;
+        font-size: 14px;
+        line-height: 14px;
+        top: 20px;
+        right: 20px;
+
+        &:hover {
+            background-color: #808080;
+        }
+
+        &:active {
+            background-color: white;
+        }
+    }
+}

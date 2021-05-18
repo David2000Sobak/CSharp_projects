@@ -1,0 +1,59 @@
+.input {
+    &-theme-light {
+        width: 400px;
+        height: 30px;
+        background-color: white;
+        position: relative;
+        margin-top: 10px;
+        border: none;
+        padding-left: 10px;
+        font-family: Rockwell;
+        color: #979A9A;
+
+        &:hover {
+            position: relative;
+            background-color: #F8F9F9;
+        }
+
+        &:active {
+            position: relative;
+            background-color: #F8F9F9;
+            border: none;
+        }
+
+        &:focus {
+            position: relative;
+            background-color: #F8F9F9;
+            border: none;
+        }
+    }
+
+    &-theme-dark {
+        width: 400px;
+        height: 30px;
+        background-color: #333333;
+        position: relative;
+        margin-top: 10px;
+        border: none;
+        padding-left: 10px;
+        font-family: Rockwell;
+        color: #979A9A;
+
+        &:hover {
+            position: relative;
+            background-color: #F8F9F9;
+        }
+
+        &:active {
+            position: relative;
+            background-color: #F8F9F9;
+            border: none;
+        }
+
+        &:focus {
+            position: relative;
+            background-color: #F8F9F9;
+            border: none;
+        }
+    }
+}
