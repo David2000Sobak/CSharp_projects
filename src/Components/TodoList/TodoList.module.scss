@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    flex-direction: row;
+
+    .project_container {
+        display: flex;
+        flex-direction: column;
+
+        .h1 {
+            font-family: Brush Script MT;
+            font-size: 50px;
+            line-height: 40px;
+            display: flex;
+            margin-left: 120px;
+            top: 30px;
+            left: 130px;
+            margin-bottom: 40px;
+            position: relative;
+            color: white;
+            text-decoration: none;
+        }
+
+        .tasks_container {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

@@ -1,48 +1,32 @@
 import styles from './TaskAdd.module.scss';
 import React from 'react';
 import classnames from "classnames/bind"
-import TaskInput from '../Input/Input'
+import Input from '../Input/Input'
 import { ThemeContext } from "../App/ThemeContext"
 
 const cx = classnames.bind(styles)
 
-class TaskAdd extends React.Component {
-  state = {
-    name: '',
-    description: ''
-  }
+const TaskAdd = ({addNewTask, taskName, taskDescription, projectId, handleChange}) => {
+  return (
+    <div className={cx("container")}>
+      <Input placeholder='What do you need to do?' value={taskName} onChange={handleChange} name="taskName" />
+      <Input placeholder='EGive further explanations here' value={taskDescription} onChange={handleChange} name="taskDescription" />
+      <AddTaskButton projectId={projectId} addNewTask={addNewTask} />
+    </div>
+  )
+}
 
-  handleChange = (event) => {
-    const { value, name } = event.currentTarget
-    this.setState({ [name]: value })
-  }
-
-  handleAddClick = () => {
-    this.props.addNewTask(this.state.name, this.state.description)
-  }
-
-  addTaskButton = () => {
-    return (
-      <div className={cx("button_container")}>
-        <ThemeContext.Consumer>
-          {theme => (
-        <button className={cx("button", `button-theme-${theme}`)} onClick={this.handleAddClick}>
-          Add my task to the list below
-          </button>)}
-        </ThemeContext.Consumer>
-        </div>
-    )
-  }
-
-  render() {
-    return (
-      <div className={cx("container")}>
-        <TaskInput placeholder='What do you need to do?' value={this.state.name} onChange={this.handleChange} name="name" />
-        <TaskInput placeholder='Give further explanations here' value={this.state.description} onChange={this.handleChange} name="description" />
-        <this.addTaskButton />
+  const AddTaskButton = ({projectId, addNewTask}) => {
+  return (
+    <div className={cx("button_container")}>
+      <ThemeContext.Consumer>
+        {theme => (
+      <button value={projectId} className={cx("button", `button-theme-${theme}`)} onClick={addNewTask}>
+        ADD TASK
+        </button>)}
+      </ThemeContext.Consumer>
       </div>
-    )
-  }
+  )
 }
 
 export default TaskAdd;
