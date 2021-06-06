@@ -4,10 +4,15 @@ import React from 'react';
 import { useParams, Redirect} from "react-router-dom"
 import styles from './ProjectTask.module.scss';
 import classnames from 'classnames/bind'
+import { connect } from "react-redux";
 
 const cx = classnames.bind(styles)
 
-const ProjectTask = ({projectsById, tasksById, changeCompletedStatus, addNewTask, taskName, taskDescription, handleChange}) => {
+const mapStateToProps = (state) => ({
+    theme: state.theme.theme
+})
+
+const ProjectTaskComponents = ({ projectsById, tasksById, theme }) => {
 
     const normalizeBy = key => {
         return (data, item) => {
@@ -15,7 +20,6 @@ const ProjectTask = ({projectsById, tasksById, changeCompletedStatus, addNewTask
             return data
         }
     }
-    
 
     const { projectId } = useParams()
 
@@ -24,23 +28,29 @@ const ProjectTask = ({projectsById, tasksById, changeCompletedStatus, addNewTask
         const proj_name = project.name
         const { tasks } = project
         const proj_tasks = (tasks.map(taskId => tasksById[taskId])).reduce(normalizeBy("id"), {})
-    
-    console.log(proj_tasks)
-    return (
-        <div className={cx("container")}>
-            <div className={cx("h1")}>Project: {proj_name}</div>
-            <div>
-                <TaskAdd addNewTask={addNewTask} projectId={projectId} taskName={taskName} taskDescription={taskDescription} handleChange={handleChange} />
+
+        console.log(proj_tasks)
+        return (
+            <div className={cx("container")}>
+                <div className={cx("title")}>Project: {proj_name}</div>
+                <div>
+                    <TaskAdd
+                        tasksById={tasksById}
+                        projectId={projectId}
+                    />
+                </div>
+                <TaskList
+                    tasksById={proj_tasks}
+                />
             </div>
-            <TaskList tasksById={proj_tasks} changeCompletedStatus={changeCompletedStatus} />
-        </div>
-    )
+        )
+    }
+    else {
+        return (
+            <Redirect to='/' />
+        )
+    }
 }
-else {
-    return (
-        <Redirect to='/' />
-    )
-}
-}
+const ProjectTask = connect(mapStateToProps)(ProjectTaskComponents)
 
 export default ProjectTask;
