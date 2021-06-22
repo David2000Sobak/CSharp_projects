@@ -1,20 +1,15 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  margin-left: 120px;
-  justify-content: center;
-  align-items: center;
-}
-
 .project {
     &-theme-light {
         background-color: white;
         width: 400px;
         margin-top: 20px;
         height: 80px;
+        left: 125px;
         position: relative;
-        display: block;
-        color: black;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
         &:hover {
             position: relative;
@@ -31,31 +26,35 @@
             position: absolute;
             color: black;
         }
+    }
 
-        &-theme-dark {
-            background-color: black;
-            color: white;
-            width: 400px;
-            margin-top: 20px;
-            height: 80px;
+    &-theme-dark {
+        background-color: black;
+        width: 400px;
+        margin-top: 20px;
+        height: 80px;
+        left: 125px;
+        position: relative;
+        display: flex;
+        color: white;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        &:hover {
             position: relative;
-            display: block;
+            top: 1px;
+        }
 
-            &:hover {
-                position: relative;
-                top: 1px;
-            }
-
-            .name {
-                font-family: Rockwell;
-                font-size: 18px;
-                line-height: 18px;
-                display: inline-block;
-                left: 20px;
-                top: 10px;
-                position: absolute;
-                color: white;
-            }
+        .name {
+            font-family: Rockwell;
+            font-size: 18px;
+            line-height: 18px;
+            display: inline-block;
+            left: 20px;
+            top: 10px;
+            position: absolute;
+            color: white;
         }
     }
 }

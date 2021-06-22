@@ -2,11 +2,21 @@ import styles from './ProjectAdd.module.scss';
 import React from 'react';
 import classnames from "classnames/bind"
 import Input from '../Input/Input'
-import { ThemeContext } from "../App/ThemeContext"
+import { connect } from "react-redux";
+import { handleProjectAdd } from '../../Actions/projects/projects'
+
 
 const cx = classnames.bind(styles)
 
-class ProjectAdd extends React.Component {
+const mapStateToProps = (state) => ({
+  theme: state.theme.theme
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatchOnProjectAdd: (name) => dispatch(handleProjectAdd(name))
+})
+
+class ProjectAddComponent extends React.Component {
   state = {
     name: ''
   }
@@ -16,31 +26,36 @@ class ProjectAdd extends React.Component {
     this.setState({ [name]: value })
   }
 
-  handleAddClick = () => {
-    this.props.addNewProject(this.state.name)
+  onProjectAdd = ({name}) => {
+    const project = {
+      name: name
+    }
+    this.props.dispatchOnProjectAdd(project.name)
   }
 
-  addProjectButton = () => {
-    return (
-      <div className={cx("button_container")}>
-        <ThemeContext.Consumer>
-          {theme => (
-        <button className={cx("button", `button-theme-${theme}`)} onClick={this.handleAddClick}>
-          Add new project
-          </button>)}
-        </ThemeContext.Consumer>
-        </div>
-    )
+  handleAddClick = () => {
+    this.onProjectAdd(this.state)
+    this.setState(this.state)
   }
 
   render() {
     return (
       <div className={cx("container")}>
-        <Input placeholder='Enter project name' value={this.state.name} onChange={this.handleChange} name="name" />
-        <this.addProjectButton />
+        <Input placeholder='Enter a new project name' value={this.state.name} onChange={this.handleChange} name="name" />
+        <AddProjectButton theme={this.props.theme} handleAddClick={this.handleAddClick} />
       </div>
     )
   }
 }
+
+const AddProjectButton = ({ theme, handleAddClick }) => {
+  return (
+      <button className={cx("button", `button-theme-${theme}`)} onClick={handleAddClick}>
+        Add new project
+        </button>
+  )
+}
+
+const ProjectAdd = connect(mapStateToProps, mapDispatchToProps)(ProjectAddComponent)
 
 export default ProjectAdd;
