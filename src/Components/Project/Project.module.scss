@@ -1,0 +1,61 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 120px;
+  justify-content: center;
+  align-items: center;
+}
+
+.project {
+    &-theme-light {
+        background-color: white;
+        width: 400px;
+        margin-top: 20px;
+        height: 80px;
+        position: relative;
+        display: block;
+        color: black;
+
+        &:hover {
+            position: relative;
+            top: 1px;
+        }
+
+        .name {
+            font-family: Rockwell;
+            font-size: 18px;
+            line-height: 18px;
+            display: inline-block;
+            left: 20px;
+            top: 10px;
+            position: absolute;
+            color: black;
+        }
+
+        &-theme-dark {
+            background-color: black;
+            color: white;
+            width: 400px;
+            margin-top: 20px;
+            height: 80px;
+            position: relative;
+            display: block;
+
+            &:hover {
+                position: relative;
+                top: 1px;
+            }
+
+            .name {
+                font-family: Rockwell;
+                font-size: 18px;
+                line-height: 18px;
+                display: inline-block;
+                left: 20px;
+                top: 10px;
+                position: absolute;
+                color: white;
+            }
+        }
+    }
+}

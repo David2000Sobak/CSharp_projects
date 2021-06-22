@@ -1,0 +1,19 @@
+.container {
+    flex-direction: column;
+    position: relative;
+    display: flex;
+    margin-left: 40px;
+
+    .h1 {
+        font-family: 'Brush Script MT';
+        font-size: 40px;
+        line-height: 40px;
+        margin-bottom: 30px;
+        display: flex;
+        margin-left: 40px;
+        position: relative;
+        color: white;
+        top: 30px;
+        left: 80px;
+    }
+}

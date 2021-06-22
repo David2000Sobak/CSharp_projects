@@ -1,33 +1,29 @@
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
   flex-direction: column;
-  padding-top: 10px;
+  margin-top: 20px;
+  margin-left: 120px;
 }
 
 .button_container {
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .button {
     &-theme-light {
-        color: black;
-        width: 220px;
-        height: 40px;
-        justify-content: center;
         background-color: #F8BBD0;
+        color: black;
+        width: 400px;
+        height: 40px;
         border-style: none;
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        position: relative;
         font-family: Rockwell;
-        font-size: 14px;
-        line-height: 14px;
+        font-size: 15px;
+        line-height: 15px;
         top: 10px;
+        display: block;
+        position: relative;
+        border-radius: 20px;
 
         &:hover {
             background-color: #E1BEE7;
@@ -39,20 +35,18 @@
     }
 
     &-theme-dark {
+        background-color: black;
         color: white;
         width: 400px;
         height: 40px;
-        justify-content: center;
-        background-color: black;
         border-style: none;
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        position: relative;
         font-family: Rockwell;
-        font-size: 14px;
-        line-height: 14px;
+        font-size: 15px;
+        line-height: 15px;
         top: 10px;
+        display: block;
+        position: relative;
+        border-radius: 20px;
 
         &:hover {
             background-color: #808080;
@@ -60,7 +54,6 @@
 
         &:active {
             background-color: white;
-            color: white;
         }
     }
 }
