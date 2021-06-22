@@ -1,13 +1,10 @@
-import styles from './TaskAdd.styles.css';
+import styles from './TaskAdd.module.scss';
 import React from 'react';
+import classnames from "classnames/bind"
+import TaskInput from '../Input/Input'
+import { ThemeContext } from "../App/ThemeContext"
 
-const TaskInput = (props) => {
-  return (
-    <div>
-      <input placeholder={props.placeholder} value={props.value} onChange={props.onChange} name={props.name} className={styles.input} />
-    </div>
-  )
-}
+const cx = classnames.bind(styles)
 
 class TaskAdd extends React.Component {
   state = {
@@ -20,23 +17,28 @@ class TaskAdd extends React.Component {
     this.setState({ [name]: value })
   }
 
-  handleAddClick = (props) => {
+  handleAddClick = () => {
     this.props.addNewTask(this.state.name, this.state.description)
   }
 
   addTaskButton = () => {
     return (
-      <div>
-        <button className={styles.button} onClick={this.handleAddClick}>ADD TASK</button>
-      </div>
+      <div className={cx("button_container")}>
+        <ThemeContext.Consumer>
+          {theme => (
+        <button className={cx("button", `button-theme-${theme}`)} onClick={this.handleAddClick}>
+          Add my task to the list below
+          </button>)}
+        </ThemeContext.Consumer>
+        </div>
     )
   }
 
   render() {
     return (
-      <div>
-        <TaskInput placeholder='Please enter a task name' value={this.state.name} onChange={this.handleChange} name="name" />
-        <TaskInput placeholder='Please enter a description' value={this.state.description} onChange={this.handleChange} name="description" />
+      <div className={cx("container")}>
+        <TaskInput placeholder='What do you need to do?' value={this.state.name} onChange={this.handleChange} name="name" />
+        <TaskInput placeholder='Give further explanations here' value={this.state.description} onChange={this.handleChange} name="description" />
         <this.addTaskButton />
       </div>
     )
